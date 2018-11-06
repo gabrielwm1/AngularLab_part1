@@ -15,33 +15,30 @@
         <h1>TODO List</h1>
         <h2>A place to store the things you have to do!</h2>
 
-        <input class="filter" type="text" placeholder="Filter">
+        <input class="filter" type="text" placeholder="Filter" ng-model= $ctrl.filterList>
         <ol>
-            <li ng-repeat= "item in $ctrl.toDo track by $index"
+            <li ng-repeat= "item in $ctrl.toDo | filter: $ctrl.filterList track by $index"
                 ng-class= "{'completed': item.completed === true}">
-                <button ng-if="item.completed === false">Complete</button>
+                <button ng-if="item.completed === false"
+                        ng-click="$ctrl.completeTask(item)"
+                        class = "completeButton">Complete
+                </button>
                 
-                <p>{{  item.task  }}</p>
+                <p>{{ item.task }}</p>
+                <button ng-click="$ctrl.removeItem($index)"
+                        class="xbut">X
+                </button> 
             </li>
-                
-            <!-- </li>>Walk the dog <button class="xbut">X</button></li>
-            <li>Go to the Store <button class="xbut">X</button>  </li>
-            <li>Get gas <button class="xbut">X</button></li>
-            <li>Wash the car <button class="xbut">X</button></li> -->
         </ol>
 
-        <input class="submitItem" type="text" placeholder="Add your to do">
-
-        <button type="button" class="addButton"> Add </button>
+        <form ng-submit="$ctrl.addItem($ctrl.item)">
+        
+        <input ng-model="$ctrl.item.task" type="text" placeholder="Add your to do">
+        <button class="addButton"> Add </button>
+        
+        
+        </form>
     </section>
-
-        <!-- <form ng-submit = "$ctrl.addItem($ctrl.item);">
-            <input type="text" ng-model="$ctrl.item.task">
-            <input type="text" ng-model="ctrl.item.value">
-            <button>Add Item</button>
-        </form> -->
-
-    
 
     </section>
 

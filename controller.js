@@ -1,16 +1,30 @@
 "use strict"
 function TodoController(){
     const vm = this;
+    
+    vm.updateIndex = () =>{
+
+    }
     vm.toDo = [
-        {task:"walk the dog", completed: true},
-        {task: "Go to the store", completed: false},
-        {task: "get gas", completed: true},
-        {task: "Wash the car", completed: false}
     ];
     vm.addItem = (newItem) => {
+    
+        newItem.completed = false;
+        
         vm.toDo.push(angular.copy(newItem));
+        console.log(newItem);
+    };
+    vm.completeTask = (item) => {
+
+        item.completed = true;
+    };
+    vm.removeItem = (index) => {
+        console.log(index);
+        vm.toDo.splice(index, 1);
+        
     }
-}
+
+};
 angular 
         .module("todoApp")
         .controller("TodoController", TodoController)
